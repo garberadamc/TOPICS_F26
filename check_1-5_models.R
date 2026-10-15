@@ -5,6 +5,8 @@ library(tidyverse)
 library(here)
 library(jtools)
 
+topic1 <- read_csv("https://garberadamc.github.io/TOPICS_F26/data/homesickness_F26.csv")
+
 # Limits refer to coefficient tests for predictors and interactions in these
 # named models. Intercept and overall F tests are not tuning criteria.
 # Estimates and SEs print to 3 decimals; p-values print to 3 decimals.
@@ -320,13 +322,15 @@ show_summ(m4_homesick)
 
 # ------------------------------------------------------------------------------
 
+pain <- read_csv("https://garberadamc.github.io/TOPICS_F26/data/pain_catastrophizing_F26.csv")
+
 # Model 1: Simple model
 m1_pain <- lm(
   pain_intensity_0_10 ~
     pain_catastrophizing_score_0_52,
   data = pain
 )
-show_summ(m1_pain)
+summ(m1_pain, digits = 3)
 
 # Model 2: Adjusted model
 m2_pain <- lm(
@@ -354,7 +358,7 @@ m2_pain <- lm(
     work_limitation,
   data = pain
 )
-show_summ(m2_pain)
+summ(m2_pain)
 
 # Model 3: Interaction model: centered predictors
 pain_centered <- pain %>%
